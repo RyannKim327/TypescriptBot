@@ -1,12 +1,32 @@
 const fca = require("fca-unofficial")
+import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
 import { readFileSync } from 'fs'
+import { regex } from './utilities'
+import { commands } from './interfaces'
 
 async function scan(api: any, event: any, preferences: any){
-	let commands = command_lists
-	let notMatched = false
-	for(let i = 0; i < commands.length; i++){
-		
+	let lists: commands[] = command_lists()
+	let notMatched = true
+	for(let i = 0; i < lists.length; i++){
+		if(lists[i].command){
+			let pref = regex(preferences.prefix + lists[i].command)
+			if(pref.test(event.body)){
+				
+				notMatched = false
+			}
+		}else if(lists[i].queries){
+			// let pref = lists[i].queries ?? []
+			// for(let j = 0; j < pref.length; j++){}
+			// 	let name = regex(preferences.name + pref[j])
+			// 	if(name.test(event.body)){
+					
+			// 	}
+			// }
+		}
+	}
+	if(notMatched && (event.body.startsWith(preferences.name) || event.body.startsWith(preferences.prefix))){
+		artificial_inteligence(api, event, preferences)
 	}
 }
 
