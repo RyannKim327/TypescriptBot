@@ -15,7 +15,6 @@ async function scan(api: any, event: any, preferences: any){
 				let pref = regex(preferences.prefix + lists[i].command)
 				if(pref.test(event.body)){
 					let folder = "user-commands"
-					console.log(lists[i].adminCommand)
 					if(lists[i].adminCommand){
 						folder = "admin-commands"
 					}
@@ -28,13 +27,13 @@ async function scan(api: any, event: any, preferences: any){
 					notMatched = false
 				}
 			}else if(lists[i].queries){
-				// let pref = lists[i].queries ?? []
-				// for(let j = 0; j < pref.length; j++){}
-				// 	let name = regex(preferences.name + pref[j])
-				// 	if(name.test(event.body)){
+				let pref = lists[i].queries ?? [""]
+				for(let j = 0; j < pref.length; j++){
+					let name = regex(preferences.name + pref[j])
+					if(name.test(event.body)){
 						
-				// 	}
-				// }
+					}
+				}
 			}
 		}
 	}

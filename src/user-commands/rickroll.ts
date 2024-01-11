@@ -21,6 +21,13 @@ export async function main(api: any, event: any){
 				id: event.messageReply.senderID,
 				tag: user[event.messageReply.senderID]['name']
 			}]
-		}, event.threadID)
+		}, event.threadID, (error: any, message: any) => {
+			if(error) return console.error(`Error [Rickroll]: ${error}`)
+			api.sendMessage({
+				attachment: createReadStream(`${__dirname}/../../res/rickroll.gif`)
+			}, event.threadID, (error: any, message: any) => {
+				if(error) return console.error(`Error [Rickroll GIF]: ${error}`)
+			})
+		})
 	})
 }
