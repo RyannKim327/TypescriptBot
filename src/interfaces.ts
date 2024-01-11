@@ -3,5 +3,5 @@ export interface commands {
 	description: string
 	command?: string
 	queries?: string[]
-	
+	adminCommand?: boolean
 }

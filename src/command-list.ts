@@ -2,10 +2,10 @@ import { commands } from './interfaces'
 
 const command: commands[] = [
 	{
-		name: "",
-		description: "",
-		command: "",
-		queries: [""]
+		name: "Checker",
+		description: "This is just to check, wether the bot is still active or not",
+		command: "check",
+		adminCommand: true
 	}
 ]
 

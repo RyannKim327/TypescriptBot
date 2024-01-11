@@ -1,11 +1,13 @@
 const fca = require("fca-unofficial")
 import { command_lists } from './command-list'
-import { commands } from './interfaces' 
 import { readFileSync } from 'fs'
 
-const data = () => {
-	let com: commands[] = []
-	return com
+async function scan(api: any, event: any, preferences: any){
+	let commands = command_lists
+	let notMatched = false
+	for(let i = 0; i < commands.length; i++){
+		
+	}
 }
 
 async function start() {
@@ -19,9 +21,10 @@ async function start() {
 		})
 
 		api.listen(async (error: any, event: any) => {
+			let preferences = JSON.parse(readFileSync("configuration/index.json", "utf-8"))
 			if(error) return console.error(`Error [Event] ${error.error}`)
 			if(event.body != null){
-				
+				scan(api, event, preferences)
 			}
 		})
 	})
