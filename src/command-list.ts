@@ -8,3 +8,7 @@ const command: commands[] = [
 		queries: [""]
 	}
 ]
+
+export function command_lists() {
+	return command
+}

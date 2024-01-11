@@ -1,6 +1,5 @@
 const fca = require("fca-unofficial")
-import { check } from './admin-commands/check'
-import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
+import { command_lists } from './command-list'
 import { commands } from './interfaces' 
 import { readFileSync } from 'fs'
 
