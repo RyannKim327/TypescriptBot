@@ -54,14 +54,12 @@ async function start() {
 			logLevel: "silent"
 		})
 
-		if(existsSync(`./../temp`)){
-			rm(`./../temp`, (error: any) => {
-				if(error) return console.error(`Pre may error`)
-				setTimeout(() => {
-					mkdirSync("./../temp")
-				}, 500)
-			})
-		}
+		rm(`${__dirname}/../temp`, { recursive: true }, (error: any) => {
+			if(error) return console.error(`Pre may error ${JSON.stringify(error)}`)
+			setTimeout(() => {
+				mkdirSync(`${__dirname}/../temp`)
+			}, 500)
+		})
 		
 		api.listen(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
