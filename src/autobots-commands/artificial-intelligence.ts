@@ -7,6 +7,9 @@ export async function artificial_inteligence(api: any, event: any, preferences: 
 	}else{
 		body = body.substring(preferences.name.length)
 	}
-	let { data } = await axios.get(`https://hercai.onrender.com/gemini/hercai?question=${body}`)
-	api.sendMessage(data.reply, event.threadID, event.messageID)
+	api.sendTypingIndicator(event.threadID, async (error: any) => {
+		let { data } = await axios.get(`https://hercai.onrender.com/gemini/hercai?question=${body}`)
+		if(error) console.error(`Error [Artificial Inteligence typing]: ${error.error}`)
+		api.sendMessage(data.reply, event.threadID, event.messageID)
+	})
 }
