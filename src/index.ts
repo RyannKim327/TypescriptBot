@@ -1,5 +1,5 @@
 const fca = require("fca-unofficial")
-import { test } from './admin-commands/test'
+import { check } from './admin-commands/check'
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { commands } from './interfaces' 
 import { readFileSync } from 'fs'
@@ -22,11 +22,7 @@ async function start() {
 		api.listen(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${error.error}`)
 			if(event.body != null){
-				if(event.body == "/test_command"){
-					test(api, event)
-				}else if(event.body.startsWith("/")){
-					artificial_inteligence(api, event)
-				}
+				
 			}
 		})
 	})
