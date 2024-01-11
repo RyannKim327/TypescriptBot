@@ -1,7 +1,7 @@
 const fca = require("fca-unofficial")
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
-import { readFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, rm } from 'fs'
 import { regex } from './utilities'
 import { commands } from './interfaces'
 
@@ -53,6 +53,15 @@ async function start() {
 			selfListen: true,
 			logLevel: "silent"
 		})
+
+		if(existsSync(`./../temp`)){
+			rm(`./../temp`, (error: any) => {
+				if(error) return console.error(`Pre may error`)
+				setTimeout(() => {
+					mkdirSync("./../temp")
+				}, 500)
+			})
+		}
 		
 		api.listen(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
