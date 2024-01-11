@@ -51,8 +51,8 @@ async function start() {
 		})
 		
 		api.listen(async (error: any, event: any) => {
+			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
 			let preferences = JSON.parse(readFileSync("configurations/index.json", "utf-8"))
-			if(error) return console.error(`Error [Event] ${error.error}`)
 			if(event.body != null){
 				scan(api, event, preferences)
 			}

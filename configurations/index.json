@@ -1,8 +1,1 @@
-{
-	"status": true,
-	"busy": false,
-	"autoBot": false,
-	"name": "RySes",
-	"prefix": "/",
-	"aiVersion": "turbo"
-}
+{"status":true,"busy":false,"autoBot":false,"name":"RySes","prefix":"/","aiVersion":"v3"}
