@@ -12,7 +12,16 @@ async function scan(api: any, event: any, preferences: any){
 		if(lists[i].command){
 			let pref = regex(preferences.prefix + lists[i].command)
 			if(pref.test(event.body)){
-				
+				let folder = "user-commands"
+				if(lists[i].adminCommand){
+					folder = "admin-commands"
+				}
+				const { main } = require(`./${folder}/${lists[i].script}`)
+				if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
+					main(api, event, pref)
+				}else{
+					main(api, event)
+				}
 				notMatched = false
 			}
 		}else if(lists[i].queries){
@@ -41,7 +50,7 @@ async function start() {
 		})
 
 		api.listen(async (error: any, event: any) => {
-			let preferences = JSON.parse(readFileSync("configuration/index.json", "utf-8"))
+			let preferences = JSON.parse(readFileSync("configurations/index.json", "utf-8"))
 			if(error) return console.error(`Error [Event] ${error.error}`)
 			if(event.body != null){
 				scan(api, event, preferences)

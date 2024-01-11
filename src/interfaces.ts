@@ -1,4 +1,5 @@
 export interface commands {
+	script: string
 	name: string
 	description: string
 	command?: string
