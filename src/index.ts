@@ -9,29 +9,33 @@ async function scan(api: any, event: any, preferences: any){
 	let lists: commands[] = command_lists()
 	let notMatched = true
 	for(let i = 0; i < lists.length; i++){
-		if(lists[i].command){
-			let pref = regex(preferences.prefix + lists[i].command)
-			if(pref.test(event.body)){
-				let folder = "user-commands"
-				if(lists[i].adminCommand){
-					folder = "admin-commands"
+		let messageType = lists[i].type ?? ["message"]
+		if(messageType.includes(event.type)){
+			if(lists[i].command){
+				let pref = regex(preferences.prefix + lists[i].command)
+				if(pref.test(event.body)){
+					let folder = "user-commands"
+					console.log(lists[i].adminCommand)
+					if(lists[i].adminCommand){
+						folder = "admin-commands"
+					}
+					const { main } = require(`./${folder}/${lists[i].script}`)
+					if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
+						main(api, event, pref)
+					}else{
+						main(api, event)
+					}
+					notMatched = false
 				}
-				const { main } = require(`./${folder}/${lists[i].script}`)
-				if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
-					main(api, event, pref)
-				}else{
-					main(api, event)
-				}
-				notMatched = false
+			}else if(lists[i].queries){
+				// let pref = lists[i].queries ?? []
+				// for(let j = 0; j < pref.length; j++){}
+				// 	let name = regex(preferences.name + pref[j])
+				// 	if(name.test(event.body)){
+						
+				// 	}
+				// }
 			}
-		}else if(lists[i].queries){
-			// let pref = lists[i].queries ?? []
-			// for(let j = 0; j < pref.length; j++){}
-			// 	let name = regex(preferences.name + pref[j])
-			// 	if(name.test(event.body)){
-					
-			// 	}
-			// }
 		}
 	}
 	if(notMatched && (event.body.startsWith(preferences.name) || event.body.startsWith(preferences.prefix))){

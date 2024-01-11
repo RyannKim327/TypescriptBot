@@ -14,6 +14,13 @@ const command: commands[] = [
 		description: "This is just to check, weather the bot is still active or not",
 		command: "check",
 		adminCommand: true
+	},
+	{
+		script: "rickroll",
+		name: "Rickroll Command",
+		description: "This is to rickroll your friend",
+		command: "rickroll",
+		type: ["message_reply"]
 	}
 ]
 
