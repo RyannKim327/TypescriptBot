@@ -47,7 +47,7 @@ async function start() {
 	fca({
 		appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8"))
 	}, async (error: any, api: any) => {
-		if(error) return console.error(`Error [API]: ${error.error}`)
+		if(error) return console.error(`Error [API]: ${error}`)
 		api.setOptions({
 			listenEvents: true,
 			selfListen: true,

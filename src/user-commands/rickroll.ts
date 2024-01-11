@@ -9,7 +9,7 @@ export async function main(api: any, event: any){
 	}).pipe(file).on("finish", async () => {
 		let user = await api.getUserInfo(event.messageReply.senderID)
 		api.sendMessage({
-			body: `A special message for you`,
+			body: `A song requested for you ${user[event.messageReply.senderID]['name']}`,
 			attachment: createReadStream(`${__dirname}/../../temp/rick_user_${event.messageReply.senderID}.mp3`).on("end", () => {
 				if(existsSync(`${__dirname}/../../temp/rick_user_${event.messageReply.senderID}.mp3`)){
 					unlink(`${__dirname}/../../temp/rick_user_${event.messageReply.senderID}.mp3`, (error: any) => {
