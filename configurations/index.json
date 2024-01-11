@@ -3,5 +3,6 @@
 	"busy": false,
 	"autoBot": false,
 	"name": "RySes",
-	"prefix": "/"
+	"prefix": "/",
+	"aiVersion": "turbo"
 }

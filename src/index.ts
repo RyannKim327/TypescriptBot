@@ -46,9 +46,10 @@ async function start() {
 		if(error) return console.error(`Error [API]: ${error.error}`)
 		api.setOptions({
 			listenEvents: true,
-			selfListen: true
+			selfListen: true,
+			logLevel: "silent"
 		})
-
+		
 		api.listen(async (error: any, event: any) => {
 			let preferences = JSON.parse(readFileSync("configurations/index.json", "utf-8"))
 			if(error) return console.error(`Error [Event] ${error.error}`)

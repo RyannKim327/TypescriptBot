@@ -19,3 +19,7 @@ npm install typescript
 ---
 ### Notes
 > If you want to study more about typescript, kindly read this documentation: https://khalilstemmler.com/blogs/typescript/node-starter-project/
+
+---
+### Setups
+> First thing you need is to know the other data, I've created a folder called privates, where all data are privately redirected there, specially the `appstate.json`. So first is you need to create a file named `appstate.json` inside of the privates folder, if the folder doesn't exists just create and name it `privates`.

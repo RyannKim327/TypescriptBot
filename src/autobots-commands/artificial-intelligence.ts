@@ -1,4 +1,5 @@
 import axios from "axios";
+import { react } from "../utilities";
 
 export async function artificial_inteligence(api: any, event: any, preferences: any){
 	let body = event.body
@@ -7,9 +8,14 @@ export async function artificial_inteligence(api: any, event: any, preferences: 
 	}else{
 		body = body.substring(preferences.name.length)
 	}
+	react(api, event, "🤔")
+	const version = preferences.aiVersion
 	api.sendTypingIndicator(event.threadID, async (error: any) => {
-		let { data } = await axios.get(`https://hercai.onrender.com/gemini/hercai?question=${body}`)
+		let { data } = await axios.get(`https://hercai.onrender.com/${version}/hercai?question=${body}`)
 		if(error) console.error(`Error [Artificial Inteligence typing]: ${error.error}`)
-		api.sendMessage(data.reply, event.threadID, event.messageID)
+		api.sendMessage(data.reply, event.threadID, (error: any, message: any) => {
+			if(error) return console.error(`Error [AI]: ${error.error}`)
+			react(api, event, "")
+		}, event.messageID)		
 	})
 }
