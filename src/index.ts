@@ -1,9 +1,12 @@
 const fca = require("fca-unofficial")
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
-import { existsSync, mkdirSync, readFileSync, rm } from 'fs'
+import { mkdirSync, readFileSync, rm } from 'fs'
 import { regex } from './utilities'
 import { commands } from './interfaces'
+
+const admins: any[] = ["61555199001800"]
+const attemptAdmin: any[] = []
 
 async function scan(api: any, event: any, preferences: any){
 	let lists: commands[] = command_lists()
@@ -17,6 +20,13 @@ async function scan(api: any, event: any, preferences: any){
 					let folder = "user-commands"
 					if(lists[i].adminCommand){
 						folder = "admin-commands"
+					}
+					if(lists[i].adminCommand && !admins.includes(event.senderID)){
+						if(attemptAdmin.includes(event.senderID)){
+							return
+						}
+						attemptAdmin.push(event.senderID)
+						return api.sendMessage("You don't have permission for admin commands", event.threadID)
 					}
 					const { main } = require(`./${folder}/${lists[i].script}`)
 					if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
@@ -57,11 +67,15 @@ async function start() {
 		appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8"))
 	}, async (error: any, api: any) => {
 		if(error) return console.error(`Error [API]: ${error}`)
+		const selfListen: boolean = true
 		api.setOptions({
 			listenEvents: true,
-			selfListen: true,
+			selfListen: selfListen,
 			logLevel: "silent"
 		})
+		if(selfListen){
+			admins.push(api.getCurrentUserID())
+		}
 
 		rm(`${__dirname}/../temp`, { recursive: true }, (error: any) => {
 			if(error) return console.error(`Pre may error ${JSON.stringify(error)}`)
