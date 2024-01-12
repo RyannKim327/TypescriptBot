@@ -31,7 +31,17 @@ async function scan(api: any, event: any, preferences: any){
 				for(let j = 0; j < pref.length; j++){
 					let name = regex(preferences.name + pref[j])
 					if(name.test(event.body)){
-						
+						let folder = "user-commands"
+						if(lists[i].adminCommand){
+							folder = "admin-commands"
+						}
+						const { main } = require(`./${folder}/${lists[i].script}`)
+						if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
+							main(api, event, pref)
+						}else{
+							main(api, event)
+						}
+						notMatched = false
 					}
 				}
 			}

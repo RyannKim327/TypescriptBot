@@ -16,6 +16,12 @@ const command: commands[] = [
 		adminCommand: true
 	},
 	{
+		script: "music",
+		name: "Youtube Music Command",
+		description: "This is just to send a song you want.",
+		command: "music ([\\w\\W]+)"
+	},
+	{
 		script: "rickroll",
 		name: "Rickroll Command",
 		description: "This is to rickroll your friend",
