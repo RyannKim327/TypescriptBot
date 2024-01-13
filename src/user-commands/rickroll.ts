@@ -1,9 +1,14 @@
 import { createReadStream, createWriteStream, existsSync, unlink } from "fs"
 import ytdl from 'ytdl-core'
+import { react } from "../utilities"
 
 export async function main(api: any, event: any){
+	if(event.messageReply.senderID == api.getCurrentUserID()){
+		return api.sendMessage("You may never fool me.", event.threadID, (error: any, message: any) => {
+			if(error) return react(api, event)
+		}, event.messageID)
+	}
 	const file = createWriteStream(`temp/rick_user_${event.messageReply.senderID}.mp3`)
-	
 	ytdl("https://www.youtube.com/watch?v=dQw4w9WgXcQ", {
 		quality: 'lowest'
 	}).pipe(file).on("finish", async () => {
