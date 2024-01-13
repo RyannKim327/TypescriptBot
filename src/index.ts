@@ -95,3 +95,7 @@ async function start() {
 }
 
 start()
+
+export function getAllAdmins(){
+	return admins
+}

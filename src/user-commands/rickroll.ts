@@ -1,10 +1,16 @@
 import { createReadStream, createWriteStream, existsSync, unlink } from "fs"
 import ytdl from 'ytdl-core'
 import { react } from "../utilities"
+import { getAllAdmins } from "../index"
 
 export async function main(api: any, event: any){
 	if(event.messageReply.senderID == api.getCurrentUserID()){
 		return api.sendMessage("You may never fool me.", event.threadID, (error: any, message: any) => {
+			if(error) return react(api, event)
+		}, event.messageID)
+	}
+	if(getAllAdmins().includes(event.messageReply.senderID)){
+		return api.sendMessage("You may never fool us.", event.threadID, (error: any, message: any) => {
 			if(error) return react(api, event)
 		}, event.messageID)
 	}

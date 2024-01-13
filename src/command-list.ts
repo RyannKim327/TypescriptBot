@@ -14,6 +14,11 @@ const command: commands[] = [
 		description: "This is just to check, weather the bot is still active or not",
 		command: "check",
 		adminCommand: true
+	},{
+		script: "prefix",
+		name: "Prefix Changer",
+		description: "To change the prefix",
+		command: "prefix ([^\\w\\S]{1})"
 	},
 	{
 		script: "music",
