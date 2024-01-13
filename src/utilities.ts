@@ -18,7 +18,7 @@ export function regex(convert: string){
 export function react(api: any, event: any, reaction?: string){
 	api.setMessageReaction(reaction ?? "😢", event.messageID, (error: any) => {
 		if(error){
-			console.error(`Error [Message Reaction] ${error.error}`)
+			console.error(`Error [Message Reaction] ${error}`)
 		}
 	}, true)
 }
