@@ -32,8 +32,8 @@ export async function main(api: any, event: any){
 		"And to all developers of the API used for this project."
 	]
 	let message = `Greetings, I am ${user[api.getCurrentUserID()]['name']}, your semi human semi bot. Here are my services and commands, that you may use:\n\n`
-	for(let i in command_lists()){
-		let command: any = command_lists()[i]
+	for(let i in command_lists){
+		let command: any = command_lists[i]
 		let hint = command.hint ?? command.command
 		let type = command.type ?? ["message"]
 		message += `${parseInt(i) + 1}: ${command.name}\n    - ${command.description}\nCommand: ${preferences.prefix}${hint}\nType: ${type.join(", ")}\n\n`

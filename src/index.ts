@@ -9,7 +9,7 @@ const admins: any[] = ["61555199001800"]
 const attemptAdmin: any[] = []
 
 async function scan(api: any, event: any, preferences: any){
-	let lists: commands[] = command_lists()
+	let lists: commands[] = command_lists
 	let notMatched = true
 	for(let i = 0; i < lists.length; i++){
 		let messageType = lists[i].type ?? ["message"]

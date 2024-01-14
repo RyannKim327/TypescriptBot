@@ -1,6 +1,6 @@
 import { commands } from './interfaces'
 
-const command: commands[] = [
+export const command_lists: commands[] = [
 	{
 		script: "ai-version",
 		name: "AI Version Changer",
@@ -43,7 +43,3 @@ const command: commands[] = [
 		type: ["message_reply"]
 	}
 ]
-
-export function command_lists() {
-	return command
-}
