@@ -5,7 +5,6 @@ import { react } from '../utilities'
 
 export async function main(api: any, event: any, regex: RegExp){
 	let prompt = event.body.match(regex)[1].trim()
-	console.log(prompt)
 	let { data } = await axios.get(`https://hercai.onrender.com/v3/text2image?prompt=${encodeURI(prompt)}`)
 	const file = createWriteStream(`temp/${event.senderID}-ai-image.png`)
 	const filename = `${__dirname}/../../temp/${event.senderID}-ai-image.png`
