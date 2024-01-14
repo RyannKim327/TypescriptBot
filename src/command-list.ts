@@ -24,16 +24,24 @@ export const command_lists: commands[] = [
 		adminCommand: true
 	},
 	{
+		script: "help",
+		name: "Help Command",
+		description: "A guide on how to use this bot and also on introduction",
+		command: "f1"
+	},
+	{
+		script: "image-generator",
+		name: "Image Generator Command",
+		description: "This is just an image generator",
+		command: "imgenerate ([\\w\\W]+)",
+		hint: "imgenerate (prompt)"
+	},
+	{
 		script: "music",
 		name: "Youtube Music Command",
 		description: "This is just to send a song you want.",
 		command: "music ([\\w\\W]+)",
 		hint: "music (search|link)"
-	},{
-		script: "help",
-		name: "Help Command",
-		description: "A guide on how to use this bot and also on introduction",
-		command: "f1"
 	},
 	{
 		script: "rickroll",
