@@ -32,9 +32,11 @@ async function scan(api: any, event: any, preferences: any){
 					if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
 						react(api, event, "🌀")
 						main(api, event, pref)
+						react(api, event, "")
 					}else{
 						react(api, event, "🌀")
 						main(api, event)
+						react(api, event, "")
 					}
 					notMatched = false
 				}
@@ -51,9 +53,11 @@ async function scan(api: any, event: any, preferences: any){
 						if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
 							react(api, event, "🌀")
 							main(api, event, pref)
+							react(api, event, "")
 						}else{
 							react(api, event, "🌀")
 							main(api, event)
+							react(api, event, "")
 						}
 						notMatched = false
 					}
