@@ -2,7 +2,7 @@ const fca = require("fca-unofficial")
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
 import { mkdirSync, readFileSync, rm } from 'fs'
-import { regex } from './utilities'
+import { react, regex } from './utilities'
 import { commands } from './interfaces'
 
 const admins: any[] = ["61555199001800"]
@@ -30,8 +30,10 @@ async function scan(api: any, event: any, preferences: any){
 					}
 					const { main } = require(`./${folder}/${lists[i].script}`)
 					if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
+						react(api, event, "🌀")
 						main(api, event, pref)
 					}else{
+						react(api, event, "🌀")
 						main(api, event)
 					}
 					notMatched = false
@@ -47,8 +49,10 @@ async function scan(api: any, event: any, preferences: any){
 						}
 						const { main } = require(`./${folder}/${lists[i].script}`)
 						if(lists[i].command?.includes("(") && lists[i].command?.includes(")")){
+							react(api, event, "🌀")
 							main(api, event, pref)
 						}else{
+							react(api, event, "🌀")
 							main(api, event)
 						}
 						notMatched = false

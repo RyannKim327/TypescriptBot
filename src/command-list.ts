@@ -33,8 +33,8 @@ export const command_lists: commands[] = [
 		script: "image-generator",
 		name: "Image Generator Command",
 		description: "This is just an image generator",
-		command: "imgenerate ([\\w\\W]+)",
-		hint: "imgenerate (prompt)"
+		command: "imgen ([\\w\\W]+)",
+		hint: "imgen (prompt)"
 	},
 	{
 		script: "music",

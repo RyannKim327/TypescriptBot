@@ -12,7 +12,7 @@ export async function artificial_inteligence(api: any, event: any, preferences: 
 	const version = preferences.aiVersion
 	api.sendTypingIndicator(event.threadID, async (error: any) => {
 		let { data } = await axios.get(`https://hercai.onrender.com/${version}/hercai?question=${body}`)
-		if(error) console.error(`Error [Artificial Inteligence typing]: ${error.error}`)
+		if(error) return console.error(`Error [Artificial Inteligence typing]: ${error.error}`)
 		api.sendMessage(data.reply, event.threadID, (error: any, message: any) => {
 			if(error) return console.error(`Error [AI]: ${error.error}`)
 			react(api, event, "")
