@@ -1,4 +1,4 @@
-const fca = require("fca-unofficial")
+const fca = require("mirai-fca-unofficial")
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
 import { mkdirSync, readFileSync, rm } from 'fs'
@@ -71,9 +71,12 @@ async function scan(api: any, event: any, preferences: any){
 }
 
 async function start() {
-	fca({
-		appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8"))
-	}, async (error: any, api: any) => {
+	const creds = JSON.parse(readFileSync("privates/credentials.json", "utf-8"))
+	fca(creds
+	// 	{
+	// 	// appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8"))
+	// }
+	, async (error: any, api: any) => {
 		if(error) return console.error(`Error [API]: ${error}`)
 		const selfListen: boolean = true
 		api.setOptions({
@@ -92,7 +95,7 @@ async function start() {
 			}, 500)
 		})
 		
-		api.listen(async (error: any, event: any) => {
+		api.listenMqtt(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
 			let preferences = JSON.parse(readFileSync("configurations/index.json", "utf-8"))
 			if(event.body != null){
