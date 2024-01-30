@@ -56,5 +56,12 @@ export const command_lists: commands[] = [
 		description: "This is to rickroll your friend",
 		command: "rickroll",
 		type: ["message_reply"]
+	},
+	{
+		script: "bible",
+		name: "Bible Verse Command",
+		description: "A command that sends your requested verses",
+		command: "verse ([\\w\\W]+)",
+		hint: "verse (search|link)"
 	}
 ]
