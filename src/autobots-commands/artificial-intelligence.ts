@@ -14,7 +14,7 @@ export async function artificial_inteligence(api: any, event: any, preferences: 
 		let { data } = await axios.get(`https://hercai.onrender.com/${version}/hercai?question=${body}`)
 		if(error) return console.error(`Error [Artificial Inteligence typing]: ${error.error}`)
 		api.sendMessage(data.reply, event.threadID, (error: any, message: any) => {
-			if(error) return console.error(`Error [AI]: ${error.error}`)
+			if(error) return console.error(`Error [AI]: ${JSON.stringify(error)}`)
 			react(api, event, "")
 		}, event.messageID)		
 	})

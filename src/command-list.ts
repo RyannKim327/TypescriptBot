@@ -30,6 +30,13 @@ export const command_lists: commands[] = [
 		command: "f1"
 	},
 	{
+		script: "avd",
+		name: "Audio Video Downloader Command",
+		description: "This is just to send sample.",
+		command: "avd ([\\w\\W]+)",
+		hint: "avd (link)"
+	},
+	{
 		script: "image-generator",
 		name: "Image Generator Command",
 		description: "This is just an image generator",
