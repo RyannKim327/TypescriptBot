@@ -1,3 +1,5 @@
+import { readFileSync, writeFileSync } from "fs"
+
 export function getTime(timeZone?: string){
 	let tz = "Asia/Manila"
 	if(timeZone){
@@ -39,4 +41,12 @@ export function fonts(text: string){
 		}
 	}
 	return returnData
+}
+
+export function saveData(filename: string, data: JSON){
+	writeFileSync(filename, JSON.stringify(data, null, 4), "utf-8")
+}
+
+export function readData(filename: string){
+	return JSON.parse(readFileSync(filename, "utf-8"))
 }

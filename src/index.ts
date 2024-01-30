@@ -2,7 +2,7 @@ const fca = require("mirai-fca-unofficial")
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
 import { mkdirSync, readFileSync, rm } from 'fs'
-import { react, regex } from './utilities'
+import { react, readData, regex } from './utilities'
 import { commands } from './interfaces'
 
 const admins: any[] = ["61555199001800"]
@@ -71,7 +71,7 @@ async function scan(api: any, event: any, preferences: any){
 }
 
 async function start() {
-	const creds = JSON.parse(readFileSync("privates/credentials.json", "utf-8"))
+	const creds = readData("privates/credentials.json")
 	fca(creds
 	// 	{
 	// 	// appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8"))
@@ -97,7 +97,7 @@ async function start() {
 		
 		api.listenMqtt(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
-			let preferences = JSON.parse(readFileSync("configurations/index.json", "utf-8"))
+			let preferences = readData("configurations/index.json")
 			if(event.body != null){
 				scan(api, event, preferences)
 			}

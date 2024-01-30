@@ -1,9 +1,9 @@
 import { readFileSync } from "fs"
 import { command_lists } from "../command-list"
-import { react } from "../utilities"
+import { react, readData } from "../utilities"
 
 export async function main(api: any, event: any){
-	const preferences = JSON.parse(readFileSync("configurations/index.json", "utf-8"))
+	const preferences = readData("configurations/index.json")
 	const user = await api.getUserInfo(api.getCurrentUserID())
 	let creds = [
 		"Salvador",
