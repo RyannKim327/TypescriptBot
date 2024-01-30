@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createReadStream, createWriteStream, existsSync, unlink } from "fs";
 import https from 'https';
+import { react } from "../utilities";
 
 export async function main(api: any, event: any, regex: RegExp){
 	const { data } = await axios.post("https://avd.vercel.app/convert", {
@@ -22,6 +23,10 @@ export async function main(api: any, event: any, regex: RegExp){
 						unlink(dir, (e) => {})
 					}
 				})
+			}, event.threadID, (error: any, message: any) => {
+				if(error){
+					react(api, event)
+				}
 			})
 		})
 	})
