@@ -33,3 +33,20 @@ npm install typescript
 ---
 ### Execution
 > To execute the program, just run to your terminal `npx nodemon` or `npx ts-node src/index.ts`. The nodemon will automatically refresh if any .js or .ts file change, while the other one needs to terminal the program onced you changed something.
+
+---
+### Credits
+* Earl Shine Sawir
+* John Paul Caigas
+* Mark Kevin Manalo
+* John Jeremy Antiguo
+* John Roy Lapida Calimlim
+* Rodrick Alcantara 
+* Jerson Carin
+* Rovie Francisco
+* Salvador
+* Lester Navarra
+* Mirai
+* Schemavery
+* VanBanLaNhat
+* Mart Anthony Salazar
