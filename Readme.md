@@ -22,4 +22,10 @@ npm install typescript
 
 ---
 ### Setups
-> First thing you need is to know the other data, I've created a folder called privates, where all data are privately redirected there, specially the `appstate.json`. So first is you need to create a file named `appstate.json` inside of the privates folder, if the folder doesn't exists just create and name it `privates`.
+> First thing you need is to know the other data, I've created a folder called privates, where all data are privately redirected there, specially the `appstate.json`. So first is you need to create a file named `appstate.json` inside of the privates folder, if the folder doesn't exists just create and name it `privates`. You may also create a file named `credentials.json`, then the content format is:
+```JSON
+{
+	"email": "yourusername",
+	"password": "sup3rm@n"
+}
+```
