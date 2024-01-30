@@ -8,7 +8,7 @@
 ---
 ### Packages
 ``` Bash
-npm install fca-unofficial
+npm install git+https://github.com/bhhoang/mirai-fca-unofficial.git
 npm install axios
 npm install nodemon
 npm install @types/nodev --save-dev
@@ -29,3 +29,7 @@ npm install typescript
 	"password": "sup3rm@n"
 }
 ```
+
+---
+### Execution
+> To execute the program, just run to your terminal `npx nodemon` or `npx ts-node src/index.ts`. The nodemon will automatically refresh if any .js or .ts file change, while the other one needs to terminal the program onced you changed something.
