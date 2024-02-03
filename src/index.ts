@@ -71,13 +71,8 @@ async function scan(api: any, event: any, preferences: any){
 }
 
 async function start() {
-	const creds = readData("privates/credentials.json")
-	fca(creds
-	// 	{
-	// 	// appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8"))
-	// }
-	, async (error: any, api: any) => {
-		if(error) return console.error(`Error [API]: ${error}`)
+	fca({ appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8")) } , async (error: any, api: any) => {
+		if(error) return console.error(`Error [API]: ${JSON.stringify(error)}`)
 		const selfListen: boolean = true
 		api.setOptions({
 			listenEvents: true,

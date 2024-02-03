@@ -37,6 +37,20 @@ export const command_lists: commands[] = [
 		hint: "avd (link)"
 	},
 	{
+		script: "baybayin",
+		name: "Baybayin Transliterator",
+		description: "It transliterate alphabet characters into baybayin",
+		command: "baybay ([\\w\\W]+)",
+		hint: "baybay (your text)"
+	},
+	{
+		script: "bible",
+		name: "Bible Verse Command",
+		description: "A command that sends your requested verses",
+		command: "verse ([\\w\\W]+)",
+		hint: "verse (bible verse(s))"
+	},
+	{
 		script: "image-generator",
 		name: "Image Generator Command",
 		description: "This is just an image generator",
@@ -56,12 +70,5 @@ export const command_lists: commands[] = [
 		description: "This is to rickroll your friend",
 		command: "rickroll",
 		type: ["message_reply"]
-	},
-	{
-		script: "bible",
-		name: "Bible Verse Command",
-		description: "A command that sends your requested verses",
-		command: "verse ([\\w\\W]+)",
-		hint: "verse (search|link)"
 	}
 ]
