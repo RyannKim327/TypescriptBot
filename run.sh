@@ -1,4 +1,3 @@
-@echo off
 echo 'Welcome to TypescriptBot'
 echo 'Developed by Ryann Kim Sesgundo'
 echo 'MPOP Reverse II'
@@ -7,19 +6,16 @@ echo '[2] Run in normal mode'
 echo '[3] Run in nodemon mode'
 echo '[4] Exit'
 
-set /p command="Enter your command: "
-
-if %command%==1 (
+echo -n 'Enter your command: '
+read command
+if [ $command == 1 ]; then
 	npx ts-node ./generator/appstate.ts
-) else if %command%==2 (
+elif [ $command == 2 ]; then
 	npx ts-node ./src/index.ts
-) else if %command%==3 (
+elif [ $command == 3 ]; then
 	npx nodemon
-) else if %command%==4 (
-	echo "Thank you"
-) else (
-	echo "Invalid command"
-	run.bat
-)
-
-pause
+elif [ $command == 4 ]; then
+	echo 'Thank you'
+else
+	source ./run.sh
+fi

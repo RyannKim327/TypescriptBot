@@ -31,6 +31,14 @@ npm install typescript
 ```
 
 ---
+### Shell (Linux) Commands
+> To start, you may execute `source run.sh` to your terminal. And choose your commands.
+
+---
+### Batch (Windows) Commands
+> To start, you may execute `./run.bat` to your terminal. And choose your commands.
+
+---
 ### Execution
 > To execute the program, just run to your terminal `npx nodemon` or `npx ts-node src/index.ts`. The nodemon will automatically refresh if any .js or .ts file change, while the other one needs to terminal the program onced you changed something.
 
