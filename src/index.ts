@@ -1,7 +1,7 @@
-const fca = require("mirai-fca-unofficial")
+const fca = require("fca-unofficial")
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
-import { mkdirSync, readFileSync, rm } from 'fs'
+import { existsSync, mkdirSync, readFileSync, rm } from 'fs'
 import { react, readData, regex } from './utilities'
 import { commands } from './interfaces'
 
@@ -71,7 +71,11 @@ async function scan(api: any, event: any, preferences: any){
 }
 
 async function start() {
-	fca({ appState: JSON.parse(readFileSync("privates/appstate.json", "utf-8")) } , async (error: any, api: any) => {
+	let state = "privates/appstate.json"
+	if(!existsSync(state)){
+		return console.error(`Please execute the Appstate generator first, before you proceed here.`)
+	}
+	fca({ appState: JSON.parse(readFileSync(state, "utf-8")) } , async (error: any, api: any) => {
 		if(error) return console.error(`Error [API]: ${JSON.stringify(error)}`)
 		const selfListen: boolean = true
 		api.setOptions({
