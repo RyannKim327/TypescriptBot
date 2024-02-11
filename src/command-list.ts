@@ -58,17 +58,17 @@ export const command_lists: commands[] = [
 		hint: "imgen (prompt)"
 	},
 	{
+		script: "rickroll",
+		name: "Special Command",
+		description: "This is to send a special random message to your friend",
+		command: "labyu",
+		type: ["message_reply"]
+	},
+	{
 		script: "music",
 		name: "Youtube Music Command",
 		description: "This is just to send a song you want.",
 		command: "music ([\\w\\W]+)",
 		hint: "music (search|link)"
-	},
-	{
-		script: "rickroll",
-		name: "Rickroll Command",
-		description: "This is to rickroll your friend",
-		command: "rickroll",
-		type: ["message_reply"]
 	}
 ]

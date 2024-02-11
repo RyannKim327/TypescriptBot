@@ -10,6 +10,7 @@ echo -n 'Enter your command: '
 read command
 if [ $command == 1 ]; then
 	npx ts-node ./generator/appstate.ts
+	source ./run.sh
 elif [ $command == 2 ]; then
 	npx ts-node ./src/index.ts
 elif [ $command == 3 ]; then
