@@ -8,9 +8,28 @@ echo '[4] Exit'
 
 echo -n 'Enter your command: '
 read command
+
+function afterAppstate () {
+	echo '[1] Run in normal mode'
+	echo '[2] Run in nodemon mode'
+	echo '[3] Exit'
+	echo -n "Enter you command: "
+	read command1
+	if [ $command1 == 1 ]; then
+		npx ts-node ./src/index.ts
+	elif [ $command1 == 2 ]; then
+		npx nodemon
+	elif [ $command1 == 3 ]; then
+		echo 'Thank you'
+	else
+		afterAppstate
+	fi
+}
+
 if [ $command == 1 ]; then
 	npx ts-node ./generator/appstate.ts
-	source ./run.sh
+	echo "The appstate updated successfully"
+	afterAppstate
 elif [ $command == 2 ]; then
 	npx ts-node ./src/index.ts
 elif [ $command == 3 ]; then
