@@ -94,7 +94,7 @@ async function start() {
 			}, 500)
 		})
 		
-		api.listen(async (error: any, event: any) => {
+		api.listenMqtt(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
 			let preferences = readData("configurations/index.json")
 			if(event.body != null){
