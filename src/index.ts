@@ -86,14 +86,17 @@ async function start() {
 		if(selfListen){
 			admins.push(api.getCurrentUserID())
 		}
+		if(existsSync(`${__dirname}/../temp`)){
+			rm(`${__dirname}/../temp`, { recursive: true }, (error: any) => {
+				if(error) return console.error(`Pre may error ${JSON.stringify(error)}`)
+				setTimeout(() => {
+					mkdirSync(`${__dirname}/../temp`)
+				}, 500)
+			})
+		}else{
+			mkdirSync(`${__dirname}/../temp`)
+		}
 
-		rm(`${__dirname}/../temp`, { recursive: true }, (error: any) => {
-			if(error) return console.error(`Pre may error ${JSON.stringify(error)}`)
-			setTimeout(() => {
-				mkdirSync(`${__dirname}/../temp`)
-			}, 500)
-		})
-		
 		api.listenMqtt(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
 			let preferences = readData("configurations/index.json")
