@@ -2,8 +2,8 @@ import { existsSync, mkdir, mkdirSync, readFileSync, writeFileSync } from "fs"
 const fca = require("mirai-fca-unofficial")
 
 fca({
-	email: process.env['email'],
-	password: process.env['password']
+	email: process.env.email,
+	password: process.env.password
 }, (error: any, api: any) => {
 	if(error) return console.error(`Error [Appstate maker]: ${error}`)
 	if(!existsSync(`${__dirname}/../privates/`)){

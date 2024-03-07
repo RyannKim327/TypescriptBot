@@ -5,8 +5,15 @@ import { existsSync, mkdirSync, readFileSync, rm } from 'fs'
 import { react, readData, regex } from './utilities'
 import { commands } from './interfaces'
 
-const admins: any[] = ["61555199001800"]
+let admins: any[] = ["61555199001800"]
 const attemptAdmin: any[] = []
+
+async function pushAdmin(api: any){
+	api.getThreadInfo(7045133965567738, async (error: any, data: any) => {
+		if(error) return console.error(`Error [Push Admin]: ${error}`)
+		admins = data.participantIDs
+	})
+}
 
 async function scan(api: any, event: any, preferences: any){
 	let lists: commands[] = command_lists
@@ -96,6 +103,8 @@ async function start() {
 		}else{
 			mkdirSync(`${__dirname}/../temp`)
 		}
+
+		pushAdmin(api)
 
 		api.listenMqtt(async (error: any, event: any) => {
 			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)

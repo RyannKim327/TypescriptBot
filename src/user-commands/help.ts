@@ -36,7 +36,7 @@ export async function main(api: any, event: any){
 		let command: any = command_lists[i]
 		let hint = command.hint ?? command.command
 		let type = command.type ?? ["message"]
-		message += `${parseInt(i) + 1}: ${command.name}\n    - ${command.description}\nCommand: ${preferences.prefix}${hint}\nType: ${type.join(", ")}\n\n`
+		message += `${parseInt(i) + 1}: ${command.name}\n    - ${command.description}\nCommand: ${preferences.prefix}${hint}\nType: ${type.join(", ")}\nPermission: ${(command.adminCommand ? 'Admin': 'Any')}\n\n`
 	}
 	message += `Credits to:\n\n${creds.join("\n")}`
 	api.sendMessage(message, event.threadID, (error: any, message_: any) => {
