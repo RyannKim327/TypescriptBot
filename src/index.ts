@@ -87,7 +87,7 @@ async function start() {
 	if(!existsSync(state)){
 		return console.error(`Please execute the Appstate generator first, before you proceed here.`)
 	}
-	fca({ appState: JSON.parse(readFileSync(state, "utf-8")) } , async (error: any, api: any) => {
+	fca({ appState: JSON.parse(readFileSync(state, "utf-8")) } , async (error: JSON, api: any) => {
 		if(error){
 			console.error(`Error [API]: ${JSON.stringify(error)}`)
 			exec("npx ts-node ./../generator/appstate.ts", (e) => {
@@ -134,6 +134,12 @@ app.listen(3000, () => {
 app.get("/", (req: any, res: any) => {
 	res.send("GO")
 })
+
+if(!existsSync(`${__dirname}/../privates/appstate.json`)){
+	exec("npx ts-node ./../generator/appstate.ts", (e) => {
+		if(e) console.error(`Error [Appstate Initiation]: ${e}`)
+	})
+}
 
 start()
 

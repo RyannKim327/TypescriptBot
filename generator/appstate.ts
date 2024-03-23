@@ -1,15 +1,9 @@
 import { existsSync, mkdir, mkdirSync, readFileSync, writeFileSync } from "fs";
 const fca = require("mirai-fca-unofficial")
-import { exec } from 'child_process'
 
 async function a() {
-	const email: string | undefined = process.env.email
-	const password: string | undefined = process.env.password
 
-	fca({
-		email: email,
-		password: password,
-	}, (error: any, api: any) => {
+	fca(JSON.parse(readFileSync("privates/credentials.json", "utf-8")), (error: any, api: any) => {
 		if (error)
 			return console.error(
 				`Error [Appstate maker]: ${JSON.stringify(error)}`,
@@ -23,9 +17,6 @@ async function a() {
 			"utf-8",
 		);
 		console.log("We did it. Hooooraaaay!!!!")
-		exec("rs", (e) => {
-			if(e) console.error(`Error [Appstate]: ${e}`)
-		})
 	})
 }
 

@@ -13,6 +13,7 @@ npm install fca-unofficial
 npm install axios
 npm install nodemon
 npm install @types/nodev --save-dev
+npm install ts-node --save-dev
 npm install typescript
 ```
 
