@@ -59,7 +59,7 @@ export async function main(api: any, event: any, regex: RegExp){
 		const info = await ytdl.getInfo(url)
 		react(api, event, "⏳")
 		ytdl(url, {
-			quality: "lowest"
+			quality: "lowestaudio"
 		}).pipe(file2).on("finish", async () => {
 			let user = await api.getUserInfo(event.senderID)
 			api.sendMessage({

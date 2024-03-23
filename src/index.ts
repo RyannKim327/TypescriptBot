@@ -1,9 +1,14 @@
 const fca = require("fca-unofficial")
+import express, { Express } from 'express'
+import axios from 'axios'
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
 import { existsSync, mkdirSync, readFileSync, rm } from 'fs'
 import { react, readData, regex } from './utilities'
 import { commands } from './interfaces'
+import { exec } from 'child_process'
+
+const app: Express = express()
 
 let admins: any[] = ["61555199001800"]
 const attemptAdmin: any[] = []
@@ -83,41 +88,63 @@ async function start() {
 		return console.error(`Please execute the Appstate generator first, before you proceed here.`)
 	}
 	fca({ appState: JSON.parse(readFileSync(state, "utf-8")) } , async (error: any, api: any) => {
-		if(error) return console.error(`Error [API]: ${JSON.stringify(error)}`)
-		const selfListen: boolean = true
-		api.setOptions({
-			listenEvents: true,
-			selfListen: selfListen,
-			logLevel: "silent"
-		})
-		if(selfListen){
-			admins.push(api.getCurrentUserID())
-		}
-		if(existsSync(`${__dirname}/../temp`)){
-			rm(`${__dirname}/../temp`, { recursive: true }, (error: any) => {
-				if(error) return console.error(`Pre may error ${JSON.stringify(error)}`)
-				setTimeout(() => {
-					mkdirSync(`${__dirname}/../temp`)
-				}, 500)
+		if(error){
+			console.error(`Error [API]: ${JSON.stringify(error)}`)
+			exec("npx ts-node ./../generator/appstate.ts", (e) => {
+				if(e) console.error(`Generator Command: ${e}`)
 			})
 		}else{
-			mkdirSync(`${__dirname}/../temp`)
-		}
-
-		pushAdmin(api)
-
-		api.listenMqtt(async (error: any, event: any) => {
-			if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
-			let preferences = readData("configurations/index.json")
-			if(event.body != null){
-				scan(api, event, preferences)
+			const selfListen: boolean = true
+			api.setOptions({
+				listenEvents: true,
+				selfListen: selfListen,
+				logLevel: "silent"
+			})
+			if(selfListen){
+				admins.push(api.getCurrentUserID())
 			}
-		})
+			if(existsSync(`${__dirname}/../temp`)){
+				rm(`${__dirname}/../temp`, { recursive: true }, (error: any) => {
+					if(error) return console.error(`Pre may error ${JSON.stringify(error)}`)
+					setTimeout(() => {
+						mkdirSync(`${__dirname}/../temp`)
+					}, 500)
+				})
+			}else{
+				mkdirSync(`${__dirname}/../temp`)
+			}
+
+			pushAdmin(api)
+
+			api.listenMqtt(async (error: any, event: any) => {
+				if(error) return console.error(`Error [Event] ${JSON.stringify(error)}`)
+				let preferences = readData("configurations/index.json")
+				if(event.body != null){
+					scan(api, event, preferences)
+				}
+			})
+		}
 	})
 }
+
+app.listen(3000, () => {
+	console.log("SHOWTIME")
+})
+
+app.get("/", (req: any, res: any) => {
+	res.send("GO")
+})
 
 start()
 
 export function getAllAdmins(){
 	return admins
 }
+
+setInterval(() => {
+	axios.get("http://localhost:3000").then(r => {
+		console.log(r.data)
+	}).catch(e => {
+		console.error(e)
+	})
+}, 1000)
