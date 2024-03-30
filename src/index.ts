@@ -7,8 +7,10 @@ import { existsSync, mkdirSync, readFileSync, rm } from 'fs'
 import { react, readData, regex } from './utilities'
 import { commands } from './interfaces'
 import { exec } from 'child_process'
+import { server } from './server'
 
-const app: Express = express()
+
+// const app: Express = express()
 
 let admins: any[] = ["61555199001800"]
 const attemptAdmin: any[] = []
@@ -82,17 +84,10 @@ async function scan(api: any, event: any, preferences: any){
 	}
 }
 
-async function start() {
-	let state = "privates/appstate.json"
-	if(!existsSync(state)){
-		return console.error(`Please execute the Appstate generator first, before you proceed here.`)
-	}
-	fca({ appState: JSON.parse(readFileSync(state, "utf-8")) } , async (error: JSON, api: any) => {
+async function start(state: string) {
+	fca({ appState: JSON.parse(state) } , async (error: JSON, api: any) => {
 		if(error){
-			console.error(`Error [API]: ${JSON.stringify(error)}`)
-			exec("npx ts-node ./../generator/appstate.ts", (e) => {
-				if(e) console.error(`Generator Command: ${e}`)
-			})
+			return console.error(`Error [API]: ${JSON.stringify(error)}`)
 		}else{
 			const selfListen: boolean = true
 			api.setOptions({
@@ -136,12 +131,11 @@ async function start() {
 // })
 
 if(!existsSync(`${__dirname}/../privates/appstate.json`)){
-	exec("npx ts-node ./../generator/appstate.ts", (e) => {
-		if(e) console.error(`Error [Appstate Initiation]: ${e}`)
-	})
+	// exec("npx ts-node ./../generator/appstate.ts", (e) => {
+		// if(e) console.error(`Error [Appstate Initiation]: ${e}`)
+	// })
+	console.log("There is no appstate existed")
 }
-
-start()
 
 export function getAllAdmins(){
 	return admins
@@ -154,3 +148,18 @@ export function getAllAdmins(){
 // 		console.error(e)
 // 	})
 // }, 1000)
+
+const appstate: any = JSON.parse(readFileSync(`configurations/appstates.json`, "utf-8"))
+
+for(let i = 0; i < appstate['accounts'].length; i++){
+	try{
+		const state: string|any = JSON.stringify(appstate['accounts'][i])
+		start(state)
+	}catch(e){}
+}
+
+export function addedstate(state: string){
+	start(state)
+}
+
+server()

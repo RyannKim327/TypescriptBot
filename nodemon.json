@@ -1,6 +1,6 @@
 {
 	"watch": [""],
-	"ext": ".ts,.js",
+	"ext": ".ts,.js, configurations/appstate.json",
 	"ignore": ["temp"],
 	"exec": "npx ts-node ./src/index.ts"
 }
