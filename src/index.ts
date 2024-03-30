@@ -1,5 +1,5 @@
 const fca = require("fca-unofficial")
-import express, { Express } from 'express'
+// import express, { Express } from 'express'
 import axios from 'axios'
 import { artificial_inteligence } from './autobots-commands/artificial-intelligence'
 import { command_lists } from './command-list'
@@ -127,13 +127,13 @@ async function start() {
 	})
 }
 
-app.listen(3000, () => {
-	console.log("SHOWTIME")
-})
+// app.listen(3000, () => {
+// 	console.log("SHOWTIME")
+// })
 
-app.get("/", (req: any, res: any) => {
-	res.send("GO")
-})
+// app.get("/", (req: any, res: any) => {
+// 	res.send("GO")
+// })
 
 if(!existsSync(`${__dirname}/../privates/appstate.json`)){
 	exec("npx ts-node ./../generator/appstate.ts", (e) => {
@@ -147,10 +147,10 @@ export function getAllAdmins(){
 	return admins
 }
 
-setInterval(() => {
-	axios.get("http://localhost:3000").then(r => {
-		console.log(r.data)
-	}).catch(e => {
-		console.error(e)
-	})
-}, 1000)
+// setInterval(() => {
+// 	axios.get("http://localhost:3000").then(r => {
+// 		console.log(r.data)
+// 	}).catch(e => {
+// 		console.error(e)
+// 	})
+// }, 1000)
