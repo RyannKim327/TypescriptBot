@@ -7,6 +7,7 @@ import { existsSync, mkdirSync, readFileSync, rm } from "fs";
 import { react, readData, regex } from "./utilities";
 import { commands } from "./interfaces";
 import { exec } from "child_process";
+import { posix } from "path";
 
 const app: Express = express();
 
@@ -204,6 +205,9 @@ export function addQuery(query: string, id: any) {
 		pastQueries[id] = [];
 	}
 	pastQueries[id].push(query);
+	while(pastQueries[id].join("\n").length > 1000){
+		pastQueries[id].shift()
+	}
 	console.log(pastQueries)
 }
 
