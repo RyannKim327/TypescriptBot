@@ -27,7 +27,7 @@ export const command_lists: commands[] = [
 		script: "help",
 		name: "Help Command",
 		description: "A guide on how to use this bot and also on introduction",
-		command: "f1"
+		command: "help"
 	},
 	{
 		script: "avd",
@@ -51,6 +51,12 @@ export const command_lists: commands[] = [
 		hint: "verse (bible verse(s))"
 	},
 	{
+		script: "clear",
+		name: "Query Clear for AI",
+		description: "A command to clear the past queries for AI",
+		command: "(thank you|ty|thanks|tnx|clear)"
+	},
+	{
 		script: "image-generator",
 		name: "Image Generator Command",
 		description: "This is just an image generator",
@@ -61,8 +67,8 @@ export const command_lists: commands[] = [
 		script: "rickroll",
 		name: "Special Command",
 		description: "This is to send a special random message to your friend",
-		command: "labyu",
-		type: ["message_reply"]
+		command: "😗",
+		type: ["message_reaction"]
 	},
 	{
 		script: "music",
