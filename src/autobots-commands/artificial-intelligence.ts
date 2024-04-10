@@ -5,7 +5,7 @@ import { addQuery, getQuery } from "../index";
 export async function artificial_inteligence(api: any, event: any, preferences: any) {
 	const b = event.body;
 	let body = event.body;
-	const q = getQuery(event.senderID);
+	const q = getQuery(`${event.senderID}_${event.threadID}`);
 	const user = await api.getUserInfo(event.senderID);
 	const bot = await api.getUserInfo(api.getCurrentUserID());
 	if (body.startsWith(preferences.prefix)) {
@@ -17,19 +17,15 @@ export async function artificial_inteligence(api: any, event: any, preferences: 
 	react(api, event, "🤔");
 	const version = preferences.aiVersion;
 	api.sendTypingIndicator(event.threadID, async (error: any) => {
-		let { data } = await axios.get(
-			`https://hercai.onrender.com/${version}/hercai?question=${body}`,
-		);
+		let { data } = await axios.get(`https://hercai.onrender.com/${version}/hercai/?question=${encodeURIComponent(body)}`);
 		if (error)
-			console.error(
-				`Error [Artificial Inteligence typing]: ${error.error}`,
-			);
+			console.error(`Error [Artificial Inteligence typing]: ${error.error}`);
 		api.sendMessage(data.reply, event.threadID, (error: any, message: any) => {
 			react(api, event, "");
 			if (error)
-			return console.error(`Error [AI]: ${JSON.stringify(error)}`);
-			addQuery(b.substring(1), event.senderID);
-			addQuery(data.reply, event.senderID);
+				return console.error(`Error [AI]: ${JSON.stringify(error)}`);
+			addQuery(b.substring(1), `${event.senderID}_${event.threadID}`);
+			addQuery(data.reply, `${event.senderID}_${event.threadID}`);
 		}, event.messageID);
 	});
 }

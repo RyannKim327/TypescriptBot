@@ -205,9 +205,9 @@ export function addQuery(query: string, id: any) {
 		pastQueries[id] = [];
 	}
 	pastQueries[id].push(query);
-	while(pastQueries[id].join("\n").length > 1000){
-		pastQueries[id].shift()
-	}
+	// while(pastQueries[id].join("\n").length > 1750){
+	// 	pastQueries[id].shift()
+	// }
 	console.log(pastQueries)
 }
 
@@ -247,7 +247,9 @@ setInterval(() => {
 	axios
 		.get("http://localhost:3000")
 		.then((r) => {
-			console.log(r.data);
+			if(Math.floor(Math.random() * 2) % 2  == 0){
+				console.log(r.data);
+			}
 		})
 		.catch((e) => {
 			console.error(e);
